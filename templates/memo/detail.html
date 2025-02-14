@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}-メモ詳細{% endblock title %}
+
+{% block content %}
+<h1 class="mt-5">{{ object.id }}の投稿詳細ページ</h1>
+<div class="card bg-light shadow-sm mt-3">
+    <div class="card-body">
+        <p>{{ memo.title }}：{{ memo.created_at }}</p>
+        <p>{{ memo.content }}</p>
+        <p><span class="badge text-bg-warning">{{ memo.tag }}</span></p>
+    </div>
+    <p><a href="{% url "memo:update" object.pk %}">{% bootstrap_button button_type="submit" button_class="btn-success" content="編集" size="md" %}</a></p>
+    <p><a href="{% url "memo:delete" object.pk %}">{% bootstrap_button button_type="submit" button_class="btn-danger" content="削除" size="md" %}</a></p>
+</div>
+
+<div class="mt-3">
+    <a href="{% url 'memo:index' %}">{% bootstrap_button button_type="submit" button_class="btn-secondary" content="一覧ページへ戻る" size="md" %}</a>
+</div>
+{% endblock %}

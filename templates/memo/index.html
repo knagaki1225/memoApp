@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+<h1 class="mt-5">メモアプリ</h1>
+<a href="{% url 'memo:create' %}">{% bootstrap_button button_type="submit" content="新規メモ作成" size="md" %}</a>
+{% for memo in object_list %}
+<div class="card bg-light shadow-sm mt-3">
+    <div class="card-body">
+        <p>{{ memo.id }} : {{ memo.created_at }}</p>
+        <p>{{ memo.title }}</p>
+        <p><span class="badge text-bg-warning">{{ memo.tag }}</span></p>
+        <p><a href="{% url 'memo:detail' memo.id %}">{% bootstrap_button button_type="submit" button_class="btn-success" content="詳細" size="sm" %}</a></p>
+    </div>
+</div>
+{% endfor %}
+<p><a href="{% url 'memo:tag' %}">{% bootstrap_button button_type="submit" content="タグ作成" size="md" %}</a></p>
+{% endblock content %}
